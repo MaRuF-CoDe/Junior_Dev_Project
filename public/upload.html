@@ -1,0 +1,62 @@
+<section class="upload">
+  <div class="drag_back mt-5">
+    <div class="container mt-3 drag">
+      <h2 class="mb-4 text-center">Drag and Drop or Click to Upload Photos</h2>
+      <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="fileInput" accept=".png, .jpg, .jpeg">
+        <button type="submit" class="btn btn-outline-light">Upload</button>
+      </form>
+
+      <!-- Overlay and alert container -->
+      <div class="overlay" id="overlay">
+        <div class="alert" id="alert">
+          <p id="alertMessage"></p>
+          <button class="ok-button" onclick="hideOverlay()">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  document.getElementById('uploadForm').addEventListener('submit', function (event) {
+    const fileInput = document.getElementById('fileInput');
+    const allowedExtensions = /\.(png|jpg|jpeg)$/i;
+
+    if (allowedExtensions.test(fileInput.value)) {
+      // Show success alert
+      showOverlay('success', 'Image uploaded successfully!');
+    } else {
+      // Show error alert
+      showOverlay('error', 'Only image files (PNG, JPG, JPEG) are allowed to upload');
+      event.preventDefault(); // Prevent the form submission
+    }
+  });
+
+  function showOverlay(type, message) {
+    const overlay = document.getElementById('overlay');
+    overlay.style.display = 'flex';
+
+    // Triggering a reflow to enable the transition
+    void overlay.offsetWidth;
+
+    const alert = document.getElementById('alert');
+    alert.style.opacity = 1;
+
+    // Apply success or error styles based on the type
+    alert.className = 'alert ' + type;
+
+    // Set the alert message
+    document.getElementById('alertMessage').textContent = message;
+  }
+
+  function hideOverlay() {
+    const overlay = document.getElementById('overlay');
+    const alert = document.getElementById('alert');
+    alert.style.opacity = 0;
+
+    // Hide the overlay after the transition ends
+    setTimeout(function () {
+      overlay.style.display = 'none';
+    }, 500); // Adjust the timeout to match the transition duration
+  }
+</script>

@@ -1,0 +1,55 @@
+<style>
+  .h:hover {
+    color: #fff; 
+    border-radius: 10px;
+    border: 3px solid #007bff;
+  }
+</style>
+<div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <div style="margin-right: 20px;"></div>
+    <div class="container-fluid">
+      <a class="navbar navbar-brand fw-bold fst-italic" href="/"><i class="fas fa-home"></i> ClickFit</a>
+      <button class="navbar navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link h active scrollButton" href="#" data-target="#features"><i class="fas fa-star"></i>Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link h active scrollButton" href="#" data-target="#testimonial"><i class="fas fa-comment"></i>Testimonial</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link h active scrollButton" href="#" data-target="#pricing"> <i class="fas fa-dollar-sign"></i> Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link h active scrollButton" href="#" data-target="#upload"><i class="fas fa-upload"></i>Upload Image</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+<script>
+  $(document).ready(function () {
+    // Click event for all buttons with the class 'scrollButton'
+    $('.scrollButton').click(function (e) {
+      e.preventDefault(); // Prevent the default behavior of the link
+
+      // Get the target section from the data-target attribute
+      var targetSection = $($(this).data('target'));
+      if (targetSection.length > 0) {
+        // Scroll to the target section and center it
+        var targetOffset = targetSection.offset().top;
+        var windowHeight = $(window).height();
+        var targetHeight = targetSection.outerHeight();
+        var scrollTo = targetOffset - (windowHeight - targetHeight) / 2;
+
+        $('html, body').animate({ scrollTop: scrollTo }, 100);
+      }
+    });
+  });
+</script>
